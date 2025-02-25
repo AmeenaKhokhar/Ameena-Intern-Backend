@@ -1,6 +1,17 @@
 export const typeDefs = /* GraphQL */ `
   scalar DateTime
 
+    input CreateSomethingInput {
+    name: String!
+  }
+
+
+    type Something {
+    id: ID!
+    name: String!
+  }
+
+
   # Input for creating a Todo, when creating, should only include string and completed status
   input CreateTodoInput {
     title: String!
@@ -30,6 +41,7 @@ export const typeDefs = /* GraphQL */ `
 
   # CUD operations, the inputs are necessary and return the specified TODO to CUD
   type Mutation {
+    createSomething(input: CreateSomethingInput!): Something!
     createTodo(input: CreateTodoInput!): Todo!
     updateTodo(input: UpdateTodoInput!): Todo!
     deleteTodo(input: DeleteTodoInput!): Todo!
@@ -41,5 +53,6 @@ export const typeDefs = /* GraphQL */ `
     getIncompleteTodos: [Todo!]!
     getCompletedTodos: [Todo!]!
     getTodoById(id: ID!): Todo
+    hello: String
   }
 `;
