@@ -1,6 +1,6 @@
 import { type QueryResolvers as IQuery } from "./generated/graphql";
 import { Context } from "./context";
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 // Initialize prisma
 const prisma = new PrismaClient();
@@ -14,7 +14,7 @@ export const Query: IQuery<Context> = {
       const todos = await prisma.todo.findMany();
       return todos;
     } catch (error) {
-      throw new Error('Failed to fetch todos');
+      throw new Error("Failed to fetch todos");
     }
   },
 
@@ -24,9 +24,9 @@ export const Query: IQuery<Context> = {
       const incompleteTodos = await prisma.todo.findMany({
         where: { completed: false },
       });
-      return incompleteTodos; 
+      return incompleteTodos;
     } catch (error) {
-      throw new Error('Failed to fetch incomplete todos');
+      throw new Error("Failed to fetch incomplete todos");
     }
   },
 
@@ -36,9 +36,9 @@ export const Query: IQuery<Context> = {
       const completedTodos = await prisma.todo.findMany({
         where: { completed: true },
       });
-      return completedTodos; 
+      return completedTodos;
     } catch (error) {
-      throw new Error('Failed to fetch completed todos');
+      throw new Error("Failed to fetch completed todos");
     }
   },
 

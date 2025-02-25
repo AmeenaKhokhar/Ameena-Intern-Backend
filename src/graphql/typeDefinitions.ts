@@ -1,16 +1,14 @@
 export const typeDefs = /* GraphQL */ `
   scalar DateTime
 
-    input CreateSomethingInput {
+  input CreateSomethingInput {
     name: String!
   }
 
-
-    type Something {
+  type Something {
     id: ID!
     name: String!
   }
-
 
   # Input for creating a Todo, when creating, should only include string and completed status
   input CreateTodoInput {
@@ -30,7 +28,7 @@ export const typeDefs = /* GraphQL */ `
     id: ID!
   }
 
-  # Type definition of a todo, should have id, title, completed, createdAt and nullable updatedAt 
+  # Type definition of a todo, should have id, title, completed, createdAt and nullable updatedAt
   type Todo {
     id: ID!
     title: String!
