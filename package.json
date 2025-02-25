@@ -6,7 +6,8 @@
     "prisma:studio": "prisma studio",
     "prisma:generate": "prisma generate",
     "graphql:generate": "graphql-codegen --config codegen.ts",
-    "generate": "npm run prisma:generate && npm run graphql:generate"
+    "generate": "npm run prisma:generate && npm run graphql:generate",
+    "prettier": "prettier --write ."
   },
   "devDependencies": {
     "@graphql-codegen/cli": "5.0.4",
@@ -14,7 +15,9 @@
     "@graphql-codegen/typescript-resolvers": "^4.4.2",
     "@types/express": "^5.0.0",
     "env-cmd": "^10.1.0",
+    "eslint": "^9.21.0",
     "nodemon": "^3.1.9",
+    "prettier": "^3.5.2",
     "prisma": "^6.3.1",
     "reflect-metadata": "^0.2.2",
     "ts-node": "^10.9.2",
