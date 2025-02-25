@@ -1,12 +1,11 @@
 import { type MutationResolvers as IMutation } from "./generated/graphql";
 import { Context } from "./context";
-import { PrismaClient } from '@prisma/client';
+import { PrismaClient } from "@prisma/client";
 
 // Initialize prisma
 const prisma = new PrismaClient();
 
 export const Mutation: IMutation<Context> = {
-
   createSomething: async (_, { input }, { prisma }) => {
     const something = await prisma.something.create({
       data: {
@@ -23,11 +22,11 @@ export const Mutation: IMutation<Context> = {
   // Create a new Todo
   createTodo: async (_, { input }) => {
     // Validation of the input: Need a title & completed & correct data types.
-    if (!input.title || typeof input.title !== 'string') {
-      throw new Error('Title is required and must be a valid string');
+    if (!input.title || typeof input.title !== "string") {
+      throw new Error("Title is required and must be a valid string");
     }
-    if (typeof input.completed !== 'boolean') {
-      throw new Error('Completed must be a boolean');
+    if (typeof input.completed !== "boolean") {
+      throw new Error("Completed must be a boolean");
     }
 
     try {
@@ -37,29 +36,29 @@ export const Mutation: IMutation<Context> = {
           completed: input.completed,
         },
       });
-      return newTodo; 
+      return newTodo;
     } catch (error: unknown) {
       if (error instanceof Error) {
         throw new Error(`Failed to create a new todo: ${error.message}`);
       } else {
-        throw new Error('Failed to create a new todo: Unknown error occurred');
+        throw new Error("Failed to create a new todo: Unknown error occurred");
       }
     }
-  }, 
+  },
 
   // Update an existing Todo
   updateTodo: async (_, { input }) => {
     const { id, title, completed } = input;
 
     // Validate inputs for id, title, and completed
-    if (!id || typeof id !== 'string') {
-      throw new Error('ID is required and must be a valid string');
+    if (!id || typeof id !== "string") {
+      throw new Error("ID is required and must be a valid string");
     }
-    if (!title || typeof title !== 'string') {
-      throw new Error('Title is required and must be a valid string');
+    if (!title || typeof title !== "string") {
+      throw new Error("Title is required and must be a valid string");
     }
-    if (typeof completed !== 'boolean') {
-      throw new Error('Completed is required and must be a boolean');
+    if (typeof completed !== "boolean") {
+      throw new Error("Completed is required and must be a boolean");
     }
 
     try {
@@ -68,7 +67,7 @@ export const Mutation: IMutation<Context> = {
         where: { id },
       });
 
-      // Validate 
+      // Validate
       if (!existingTodo) {
         throw new Error(`Todo with ID ${id} does not exist`);
       }
@@ -82,12 +81,14 @@ export const Mutation: IMutation<Context> = {
         },
       });
 
-      return updatedTodo; 
+      return updatedTodo;
     } catch (error: unknown) {
       if (error instanceof Error) {
-        throw new Error(`Failed to update todo with id: ${id}. Error: ${error.message}`);
+        throw new Error(
+          `Failed to update todo with id: ${id}. Error: ${error.message}`,
+        );
       } else {
-        throw new Error('Failed to update todo: Unknown error occurred');
+        throw new Error("Failed to update todo: Unknown error occurred");
       }
     }
   },
@@ -96,8 +97,8 @@ export const Mutation: IMutation<Context> = {
   deleteTodo: async (_, { input }) => {
     const { id } = input;
     // Validate input: ID must be a non-null string
-    if (!id || typeof id !== 'string') {
-      throw new Error('ID is required and must be a valid string');
+    if (!id || typeof id !== "string") {
+      throw new Error("ID is required and must be a valid string");
     }
 
     try {
@@ -115,13 +116,15 @@ export const Mutation: IMutation<Context> = {
         where: { id },
       });
 
-      return deletedTodo; 
+      return deletedTodo;
     } catch (error: unknown) {
       if (error instanceof Error) {
-        throw new Error(`Failed to delete todo with id: ${id}. Reason: ${error.message}`);
+        throw new Error(
+          `Failed to delete todo with id: ${id}. Reason: ${error.message}`,
+        );
       } else {
-        throw new Error('Failed to delete todo: Unknown error occurred');
+        throw new Error("Failed to delete todo: Unknown error occurred");
       }
     }
-  }
+  },
 };
